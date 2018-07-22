@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using Kartapp.Models;
 
 namespace Kartapp
 {
@@ -22,6 +24,9 @@ namespace Kartapp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddDbContext<KartappContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("KartappContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
